@@ -1,4 +1,4 @@
-class App extends React.Component {
+/* class App extends React.Component {
     state = {
         calculate: []
     }
@@ -13,37 +13,75 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root')); */
 
 // Set the date we're counting down to
-var then = new Date();
+let session = 5;
+let rest = 5;
 
-var minutesThen = then.getMinutes();
+let pause = true;
+let pomo = false;
 
-then.setMinutes(minutesThen + 10);
+let clock;
 
 // Update the count down every 1 second
-var x = setInterval(function() {
+let timer = (current) => setInterval(function () {
 
-  // Get todays date and time
-  var now = new Date().getTime();
+    // Find the session between now an the count down date
+    current = current - 1;
 
-  // Find the distance between now an the count down date
-  var distance = then - now;
+    // Display the result in the element with id="demo"
 
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-
-  // If the count down is finished, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
+    display(current);
+    // If the count down is finished, write some text 
+    if (current < 1) {
+        if(pomo){
+            clearInterval(timer);
+            session = 25;
+            pomo = false;
+            clock = timer(rest);
+        }
+        else if(!pomo){
+            clearInterval(timer);
+            rest = 5;
+            pomo = true;
+            clock = timer(session);
+        }
+    }
 }, 1000);
+
+document.getElementById("PAUSE").onclick = function () {
+    if (pause && pomo) {
+        clock = timer(session);
+        pause = false;
+    }else if (pause && !pomo){
+        clock = timer(rest);
+        pause = false;
+    }
+    else if (!pause) {
+        clearInterval(clock);
+        pause = true;
+    }
+
+}
+document.getElementById("sessionIncrement").onclick = function () {
+    if (pause) {
+        session = session + 1;
+        display(session);
+    }
+
+}
+
+document.getElementById("sessionDecrease").onclick = function () {
+    if(pause){
+        session = session - 1;
+        display(session);
+    }
+}
+
+let display = (current) => {
+    document.getElementById("demo").innerHTML = current;
+}
+
+
+display(session);
