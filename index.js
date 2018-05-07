@@ -1,19 +1,81 @@
-/* class App extends React.Component {
+ class App extends React.Component {
     state = {
-        calculate: []
+        session: 5,
+        rest: 5,
+        pause: true,
+        pomo: false
+    }
+
+    incrementTimeHandler = () =>{
+
+    }
+
+    decreaseTimeHandler = () => {
+
+    }
+
+    timer = (current) => setInterval(function () {
+
+        // Find the session between now an the count down date
+        current = current - 1;
+    
+        // Display the result in the element with id="demo"
+    
+        display(current);
+        // If the count down is finished, write some text 
+        if (current < 1) {
+            if(pomo){
+                clearInterval(timer);
+                session = 25;
+                pomo = false;
+                clock = timer(rest);
+            }
+            else if(!pomo){
+                clearInterval(timer);
+                rest = 5;
+                pomo = true;
+                clock = timer(session);
+            }
+        }
+    }, 1000);
+
+    display = (current) => {
+        document.getElementById("demo").innerHTML = current;
     }
 
     render() {
 
         return (
+            <div className="Display">
+                {this.state.session}
+            </div>
+
+        );
+    }
+}
+
+class Modal extends React.Component {
+    render(){
+        return(
             <div>
-                
+
             </div>
         );
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root')); */
+class Button extends React.Component {
+    render() {
+        return(
+            <div>
+
+            </div>
+        );
+    }
+}
+
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // Set the date we're counting down to
 let session = 5;
@@ -78,10 +140,3 @@ document.getElementById("sessionDecrease").onclick = function () {
         display(session);
     }
 }
-
-let display = (current) => {
-    document.getElementById("demo").innerHTML = current;
-}
-
-
-display(session);
