@@ -1,0 +1,11 @@
+.btn{
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 1rem;
+  border-radius: 50%;
+  padding: 0.25em 0.8em;
+  
+}
