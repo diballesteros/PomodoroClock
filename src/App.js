@@ -128,12 +128,14 @@ class App extends Component {
                     type={'Session'}
                     digit={this.state.session}>
                     <Button clicked={() => this.decreaseTimeHandler('session')}>-</Button>
+                    {this.state.session}
                     <Button clicked={() => this.incrementTimeHandler('session')}>+</Button>
                 </Modal>
                 <Modal
                     type={'Break'}
                     digit={this.state.rest}>
                     <Button clicked={() => this.decreaseTimeHandler('break')}>-</Button>
+                    {this.state.rest}
                     <Button clicked={() => this.incrementTimeHandler('break')}>+</Button>
                 </Modal>
             </div>
