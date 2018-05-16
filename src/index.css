@@ -1,6 +1,10 @@
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
-  background-image: linear-gradient(to right, #FFAAAA, #801515)
+  background-image: linear-gradient(to right, #FFAAAA, #801515);
 }

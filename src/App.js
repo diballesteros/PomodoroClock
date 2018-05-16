@@ -123,7 +123,9 @@ class App extends Component {
         return (
             <div className={classes.container}>
                 <Display time={this.secondsToHms(this.state.counter)} />
+           
                 <Button clicked={() => this.timerHandler()}>{this.state.pause ? 'Play' : 'Pause'}</Button>
+                <h1>Session:</h1>
                 <Modal
                     type={'Session'}
                     digit={this.state.session}>
@@ -131,6 +133,7 @@ class App extends Component {
                     {this.state.session}
                     <Button clicked={() => this.incrementTimeHandler('session')}>+</Button>
                 </Modal>
+                <h1>Break:</h1>
                 <Modal
                     type={'Break'}
                     digit={this.state.rest}>
