@@ -5,6 +5,14 @@ import Display from './Display/Display';
 import classes from './App.css'
 
 class App extends Component {
+    
+    /*
+    Session: Fixed time for session length
+    Rest: Fixed time for break length
+    pause: boolean to check if the timer is paused or not
+    pomo: False: timer is currently on session True: timer is currently on break
+    counter: the current countdown being display
+    */
     state = {
         session: 5,
         rest: 5,
@@ -13,6 +21,7 @@ class App extends Component {
         counter: 5
     }
 
+    //Function to convert number to hh:mm format
     secondsToHms = (d) => {
         d = Number(d);
         var h = Math.floor(d / 3600);
@@ -23,6 +32,7 @@ class App extends Component {
         );
     }
 
+    //Function that increments session or break, also validates that the timer is stopped before incrementing
     incrementTimeHandler = (clock) => {
         switch (true) {
             case clock === 'session' && this.state.pause === true && this.state.pomo === false:
@@ -52,6 +62,7 @@ class App extends Component {
         }
     }
 
+    //Function that handles decreasing session or break, also validates that it won't go below 0 and that the timer is stopped before decreasing
     decreaseTimeHandler = (clock) => {
         switch (true) {
             case clock === 'session' && this.state.pause === true && this.state.pomo === false && this.state.session > 0:
@@ -81,12 +92,14 @@ class App extends Component {
         }
     }
 
+    //setInterval for the current timer
     timer = () => {
         this.interval = setInterval(() => {
             console.log(this.state);
 
             this.setState({ counter: this.state.counter - 1 });
 
+            //When the timer goes below 0 alternate between session and break depending on the current one
             if (this.state.counter < 1) {
                 if (this.state.pomo) {
                     clearInterval(this.interval)
@@ -106,6 +119,7 @@ class App extends Component {
 
     }
 
+    //Function to handle pause
     timerHandler = () => {
         if (this.state.pause) {
             this.timer();
